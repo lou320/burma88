@@ -105,50 +105,19 @@ TEMPLATES = [
 WSGI_APPLICATION = 'monopoly.wsgi.application'
 
 
-# Database
-# https://docs.djangoproject.com/en/4.2/ref/settings/#databases
-
-
-# DB_NAME = "monopoly_7h0p"
-# DB_USER = "violet"
-# DB_PASSWORD = "MWJBmSrolyJ9lnGHm80sF5IBnzc1riHa"
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'NAME': DB_NAME,
-#         'USER': DB_USER,
-#         'PASSWORD': DB_PASSWORD,
-#         'HOST': 'dpg-ciut8rp5rnuhcnvkd950-a.oregon-postgres.render.com',
-#         'PORT': '5432',
-#     }
-# }
-
-DB_NAME = "burma88"
-DB_USER = "rose"
-DB_PASSWORD = "tor123Browser"
+DB_NAME = "db_88burma"
+DB_USER = "db_88burma_user"
+DB_PASSWORD = "tri973z6XOBbqRG2ousJPKWZZKClqkCU"
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': DB_NAME,
         'USER': DB_USER,
         'PASSWORD': DB_PASSWORD,
-        'HOST': 'localhost',
+        'HOST': 'dpg-civb8jp5rnuhcns6g97g-a.oregon-postgres.render.com',
         'PORT': '5432',
     }
 }
-
-
-
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': 'Wongmingfu999$default',
-#         'USER': 'Wongmingfu999',
-#         'PASSWORD': 'tor123Browser',
-#         'HOST': 'Wongmingfu999.mysql.pythonanywhere-services.com',
-#         'PORT': '3306',
-#     }
-# }
 
 
 # Password validation
