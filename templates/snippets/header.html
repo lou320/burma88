@@ -1,0 +1,90 @@
+<!-- for header -->
+<nav class="navbar bg-light fixed-top">
+  <div class="container-fluid">
+    <div class="container">
+      <div class="row">
+        <div class="col-6">
+          <a class="navbar-brand justify-content-start" href="{% url 'home'%}"><b>88 Burma</b></a>
+        </div>
+        <div class="col-6 d-flex justify-content-end">
+          <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
+            aria-controls="offcanvasNavbar">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <form class="d-flex mt-3" method="post" role="search" action="{% url 'items:search'%}">
+        {% csrf_token %}
+        <input name="search_query" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form>
+    </div>
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasNavbarLabel"><b>88 Burma</b></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+
+      <div class="offcanvas-body">
+        <form class="d-flex" role="search">
+          <input class="form-control me-2" id="searchInput" type="search" placeholder="Search" aria-label="Search">
+        </form>
+        <ul id="listContainer" class="navbar-nav flex-grow-1 pe-3">
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="{% url 'home'%}">Home</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" data-bs-target="#dropdownMenu" aria-expanded="false">
+              Account
+            </a>
+            <ul class="dropdown-menu" id="dropdownMenu">{%if request.user.is_authenticated%}
+              <li><a class="dropdown-item" href="{% url 'users:profile' request.user.id%}">Profile</a></li>
+              <li><a class="dropdown-item" href="{% url 'users:saved'%}">Saved Items</a></li>
+              <li><a class="dropdown-item" href="{% url 'users:logout'%}">Logout</a></li>
+              {% else %}
+              <li><a class="dropdown-item" href="{% url 'users:login'%}">Login</a></li>
+              <li><a class="dropdown-item" href="{% url 'users:registration'%}">Register</a></li>
+              {% endif %}
+            </ul>
+          </li>
+          
+          {% for choice in PRODUCT_CHOICES %}
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" data-bs-target="#dropdownMenu" aria-expanded="false">
+              {{ choice.1 }}
+            </a>
+            <ul class="dropdown-menu" id="dropdownMenu">
+              {% for subcategory in choice.2 %}
+              <li><a class="dropdown-item" href="{% url 'items:kind' kind=subcategory %}">{{subcategory}}</a></li>
+              {% endfor %}
+            </ul>
+          </li>
+          {% endfor %}
+          
+        </ul>
+
+      </div>
+
+      <script>
+        document.addEventListener('DOMContentLoaded', function() {
+          var searchInput = document.getElementById('searchInput');
+          searchInput.addEventListener('keyup', function() {
+            var searchText = searchInput.value.toLowerCase();
+            var listItems = document.querySelectorAll('#listContainer li');
+            listItems.forEach(function(item) {
+              var itemText = item.textContent.toLowerCase();
+              if (itemText.includes(searchText)) {
+                item.style.display = 'block';
+              } else {
+                item.style.display = 'none';
+              }
+            });
+          });
+        });
+      </script>
+
+    </div>
+  </div>
+</nav>

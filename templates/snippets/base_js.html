@@ -1,0 +1,34 @@
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+  var dropdownElementList = [].slice.call(document.querySelectorAll('.dropdown-toggle'));
+  var dropdownList = dropdownElementList.map(function (dropdownToggleEl) {
+    return new bootstrap.Dropdown(dropdownToggleEl);
+  });
+
+
+  function change_image(image) {
+
+    var container = document.getElementById("main-image");
+
+    container.src = image.src;
+  }
+
+  $(document).ready(function () {
+    // Initialize popovers
+    var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'));
+    var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
+      return new bootstrap.Popover(popoverTriggerEl);
+    });
+  });
+
+  $(document).ready(function () {
+    // Enable carousel autoplay
+    $('.carousel').carousel({
+      interval: 15000, // Set the interval (in milliseconds) between slide transitions
+      pause: false, // Set to 'true' if you want to pause autoplay on mouse hover
+      ride: 'carousel' // Set to 'carousel' to enable autoplay
+    });
+  });
+</script>

@@ -1,0 +1,41 @@
+<div class="row">
+  <div class="col-6">
+    <div class="dropdown">
+      <button class="btn btn-secondary dropdown-toggle" type="button" id="filterDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+        Select an option
+      </button>
+      <ul class="dropdown-menu" aria-labelledby="filterDropdown">
+        <li><input class="form-control dropdown-filter" type="text" placeholder="Search..."></li>
+        <li><hr class="dropdown-divider"></li>
+        {% for choice in PRODUCT_CHOICES %}
+          {% for subcategory in choice.1 %}
+            <li><a class="dropdown-item" href="#" data-value="{{ subcategory }}">{{ subcategory }}</a></li>
+          {% endfor %}
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+$(document).ready(function() {
+  $('.dropdown-filter').on('input', function() {
+    var searchText = $(this).val().toLowerCase();
+    $('.dropdown-item').each(function() {
+      var optionText = $(this).text().toLowerCase();
+      if (optionText.includes(searchText)) {
+        $(this).removeClass('d-none');
+      } else {
+        $(this).addClass('d-none');
+      }
+    });
+  });
+  
+  $('.dropdown-item').on('click', function() {
+    var selectedValue = $(this).data('value');
+    console.log('Selected Value:', selectedValue);
+    // Perform additional actions with the selected value
+  });
+});
+</script>

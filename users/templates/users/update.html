@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="container d-flex align-items-center justify-content-center vh-100">
+        {% for error in errors %}
+              <p>{{error}} is already taken</p>
+              {% endfor %}
+    </div>
+
+{% endblock content %}

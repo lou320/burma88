@@ -1,0 +1,220 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<style>
+    a {
+        text-decoration: none;
+    }
+</style>
+
+<div class="container-fluid">
+    <div class="card-group">
+        <div class="container">
+            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-5 g-4">
+                {% for order in orders %}
+                <div class="col">
+                    <div class="card border-top border-bottom border-3" {% if order.order_cancel %}
+                        style="border-color: #ff0000 !important;" {% endif %} {% if order.order_completed %}
+                        style="border-color: #00ff15 !important;" {% endif %} {% if order.order_confirm %}
+                        style="border-color: #0044ff  !important;" {% endif %}>
+                        <div class="card-body p-3">
+
+                            <p class="lead fw-bold " style="color: #000000;">Purchase Reciept</p>
+
+                            <div class="row">
+                                <div class="col mb-3">
+                                    <p class="small text-muted mb-1">Date</p>
+                                    <p>{{order.order_date}}</p>
+                                </div>
+                                <div class="col mb-3">
+                                    <p class="small text-muted mb-1">Order No.</p>
+                                    <p>{{order.id}}</p>
+                                </div>
+                            </div>
+
+                            <div class="p-2" style="background-color: #f2f2f2;">
+                                <div class="row">
+                                    <div class="col-md-12 col-lg-12">
+                                        <p>Name: {{order.item.item_name}}</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12 col-lg-12">
+                                        <p>Price: {{order.price}}</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12 col-lg-12">
+                                        <p>Quantity: {{order.quantity}}</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12 col-lg-12">
+                                        <p class="mb-0">Address: {{order.address}}</p>
+                                        <br>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12 col-lg-12">
+                                        <p class="mb-0">Note: {{order.note}}</p>
+                                        <br>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12 col-lg-12">
+                                            <p class="mb-0">Phone 1: {{order.phone1}}</p>
+                                            <br>
+                                        </div>
+                                    </div>
+                                    {% if order.phone2 %}
+                                    <div class="row">
+                                        <div class="col-md-12 col-lg-12">
+                                            <p class="mb-0">Phone 2: {{order.phone2}}</p>
+                                            <br>
+                                        </div>
+                                    </div>
+                                    {% endif %}
+                                    <div class="row">
+                                        <div class="col-md-12 col-lg-12">
+                                            <p class="mb-0">Cus Want to pay with: <br>{{order.payment}}</p>
+                                            <br>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row my-4">
+                                <div class="">
+                                    <p class="lead fw-bold mb-0" style="color: #000000;">Total: {{order.total_price}}
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                {% if not order.order_cancel and not order.order_confirm %}
+
+                                <div class="col-6 mb-2">
+                                    <form action="{% url 'purchases:order_confirm' %}" method="post">                            
+                                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#confirmModal_{{ order.id }}">Confirm</button>
+                                        <!-- Order Confirm Modal -->
+                                        <div class="modal fade" id="confirmModal_{{ order.id }}" tabindex="-1" aria-labelledby="confirmModalLabel_{{ order.id }}" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="confirmModalLabel_{{ order.id }}">Confirm Order</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <form action="{% url 'purchases:order_confirm' %}" method="post">
+                                                            {% csrf_token %}
+                                                            {% if order.price == '0' %}
+                                                                <div class="form-group">
+                                                                    <label for="totalPrice_{{ order.id }}">Total Price</label>
+                                                                    <input type="number" name="total_price" class="form-control" id="totalPrice_{{ order.id }}" placeholder="Total price">
+                                                                </div>
+                                                            {% endif %}
+                                                            <div class="form-group mb-2">
+                                                                <label for="deliveryDate_{{ order.id }}">Delivery Date</label>
+                                                                <input type="date" class="form-control" id="deliveryDate_{{ order.id }}" name="delivery_date" required>
+                                                            </div>
+                                                            <input type="hidden" name="order_id" value="{{ order.id }}">
+                                                            <button type="submit" class="btn btn-primary">Confirm</button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                <script>
+                                    document.addEventListener("DOMContentLoaded", function () {
+                                        var dateField = document.getElementById("id_date_field_{{ order.id }}");
+                                        var today = new Date();
+                                        today.setDate(today.getDate() + 3);  // Set the default date to three days from now
+                                        var defaultDate = today.toISOString().split('T')[0];
+                                        dateField.value = defaultDate;
+                                    });
+                                </script>
+
+                                {% elif not order.order_cancel and not order.order_completed %}
+                                <div class="col-6 mb-2">
+                                    <form action="{% url 'purchases:order_completed' %}" method="post">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="order_id" value="{{order.id}}">
+                                        <button type="submit" class="btn btn-primary">Completed</button>
+                                    </form>
+                                </div>
+                                {% endif %}
+                                {% if not order.order_cancel and not order.order_completed %}
+                                <div class="col-6 mb-2">
+                                    <button type="button" class="btn btn-secondary" data-bs-toggle="modal"
+                                        data-bs-target="#cancelModal_{{ order.id }}">Cancel</button>
+                                    <!-- Cancel Modal -->
+                                    <div class="modal fade" id="cancelModal_{{ order.id }}" tabindex="-1"
+                                        aria-labelledby="cancelModalLabel_{{ order.id }}" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="cancelModalLabel_{{ order.id }}">Cancel
+                                                        Order</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                        aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <form action="{% url 'purchases:order_cancel' %}" method="post">
+                                                        {% csrf_token %}
+                                                        <div class="mb-2 form-group">
+                                                            <label for="cancelReason_{{ order.id }}">Cancel
+                                                                Reason</label>
+                                                            <textarea class="form-control"
+                                                                id="cancelReason_{{ order.id }}"
+                                                                name="order_canceling_reason" rows="3"
+                                                                required></textarea>
+                                                        </div>
+                                                        <input type="hidden" name="order_id" value="{{ order.id }}">
+                                                        <button type="submit" class="btn btn-danger">Cancel
+                                                            Order</button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endif %}
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+<nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-center">
+        <li class="page-item">
+            {% if orders.has_previous %}
+            <a class="page-link" href="?page={{ orders.previous_page_number }}" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+            </a>
+            {% endif %}
+        </li>
+        <li class="page-item"><span hidden class="current-page">{{ orders.number }}</span></li>
+        {% for number in number_range %}
+        {% if number != 0 %}
+        <li class="page-item"><a class="page-link" href="?page={{ number }}">{{ number }}</a></li>
+        {% endif %}
+        {% endfor %}
+        <li class="page-item">
+            {% if orders.has_next %}
+            <a class="page-link" href="?page={{ orders.next_page_number }}" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+            </a>
+            {% endif %}
+        </li>
+    </ul>
+</nav>
+
+
+{% endblock content %}

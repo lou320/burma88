@@ -1,0 +1,113 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<style>
+  a {
+    text-decoration: none;
+  }
+</style>
+<!-- for items -->
+{% if error %}
+<div class="alert alert-danger container-fluid alert-dismissible fade show" role="alert">
+  <strong>{{error}}</strong>
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{% endif %}
+{% if success %}
+<div class="alert alert-success container-fluid alert-dismissible fade show" role="alert">
+  <strong>{{success}}</strong>
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{% endif %}
+{% for field in form %}
+{% for error in field.errors %}
+<div class="alert alert-danger container-fluid alert-dismissible fade show" role="alert">
+  <strong>{{error}}</strong>
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{% endfor %}
+{% endfor %}
+<style>
+  @media (min-width: 992px) {
+      /* Apply smaller width for large screens */
+      .carous {
+        max-width: 600px;
+      }}
+</style>
+<div class="container carous rounded">
+  <div id="carouselExample" class="carousel slide">
+    <div class="carousel-inner">
+      {% for ads in advertisement %}
+      <div class="carousel-item {% if forloop.first %}active{% endif %}">
+        <a href="{% url 'users:profile' ads.ad_shop.id%}"><img src="{{ads.shop_ads.url}}" style="width: 100%; object-fit: scale-down;" class="d-block rounded" alt="..."></a> <!--best if 1026x536-->
+      </div>
+      {% endfor %}
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+</div>
+
+<div class="container-fluid p-2">
+  <div class="card-group">
+    <div class="container-fluid">
+      <div class="row row-cols-1 row-cols-md-2 row-cols-lg-5 g-4">
+        {% for item in items %}
+        <a href="{% url 'items:detail' item.id%}">
+          <div class="col">
+            <div class="card">
+              <img src="{{item.item_image1}}" style="height: 300px; object-fit: scale-down;" class="card-img-top rounded-top img-fluid"
+                alt="No Image" />
+              <div class="card-body">
+                
+                <h5 style="display: inline;" class="card-title">Item: {{item.item_name}}</h5>
+                <p style="color: green;">{% if item.price != 0 %}{{item.price}}MMK{% else%}စျေးအပြောင်းအလဲရှိနိုင်{% endif %}</p>
+                <h5 class="card-title">Shop: {{item.shop_name}}</h5> 
+                <p>Kind: {{item.kind}}</p>
+                
+                <p class="card-text text-truncate">
+                  {{item.details}}
+                </p>
+              </div>
+              <div class="card-footer">
+                <small class="text-muted">{{item.date_posted}}</small>
+              </div>
+            </div>
+          </div>
+        </a>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+<nav aria-label="Page navigation example">
+  <ul class="pagination justify-content-center">
+    <li class="page-item">
+      {% if items.has_previous %}
+      <a class="page-link" href="?page={{ items.previous_page_number }}" aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+      </a> {% endif %}
+    </li>
+    <span hidden class="current-page">{{ items.number }}</span>
+    {% for number in number_range %}
+      {% if number != 0 %}
+      <li class="page-item"><a class="page-link" href="?page={{ number }}">{{ number }}</a></li>
+      {% endif %}
+    {% endfor %}
+      {% if items.has_next %}
+      <a class="page-link" href="?page={{ items.next_page_number }}" aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+      </a>
+      {% endif %}
+    </li>
+  </ul>
+</nav>
+{% endblock content %}
