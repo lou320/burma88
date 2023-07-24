@@ -85,9 +85,19 @@ def post(request):
                 item.details = form.cleaned_data['details']
                 item.kind = form.cleaned_data['kind']
                 item.item_link = form.cleaned_data['item_link']
-                item.item_image1 = form.cleaned_data['item_image1']
-                item.item_image2 = form.cleaned_data['item_image2']
-                item.item_image3 = form.cleaned_data['item_image3']
+                default_image_url = 'https://github.com/lou320/weee_images/blob/main/noimage.jpg?raw=true'
+                if form.cleaned_data['item_image1'] == '':
+                    item.item_image1 = default_image_url
+                else:
+                    item.item_image1 = form.cleaned_data['item_image1']
+                if form.cleaned_data['item_image2'] == '':
+                    item.item_image2 = default_image_url
+                else:
+                    item.item_image2 = form.cleaned_data['item_image2']
+                if form.cleaned_data['item_image3'] == '':
+                    item.item_image3 = default_image_url
+                else:
+                    item.item_image3 = form.cleaned_data['item_image3']
                 item.save()
                 items = Item.objects.filter(shop_id=form.cleaned_data['shop_id'])
                 user = Users.objects.get(id=form.cleaned_data['shop_id'])
@@ -111,6 +121,7 @@ def post(request):
                 context['form'] = form
                 return render(request, 'main/home.html', context)
         else:
+            print(form.errors)
             return redirect('/users/' + str(request.user.id))
     else:
         form = ItemForm()

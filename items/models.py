@@ -10,15 +10,18 @@ class Item(models.Model):
     price = models.IntegerField()
     item_link = models.CharField(max_length=500)
     details = models.CharField(max_length=500)
-    item_image1 = models.CharField(max_length=500, default='https://raw.githubusercontent.com/lou320/weee_images/main/noimage.jpg')
-    item_image2 = models.CharField(max_length=500, default='https://raw.githubusercontent.com/lou320/weee_images/main/noimage.jpg')
-    item_image3 = models.CharField(max_length=500, default='https://raw.githubusercontent.com/lou320/weee_images/main/noimage.jpg')
+    item_image1 = models.CharField(max_length=500, default='https://github.com/lou320/weee_images/blob/main/noimage.jpg?raw=true')
+    item_image2 = models.CharField(max_length=500, default='https://github.com/lou320/weee_images/blob/main/noimage.jpg?raw=true')
+    item_image3 = models.CharField(max_length=500, default='https://github.com/lou320/weee_images/blob/main/noimage.jpg?raw=true')
     date_posted= models.DateTimeField(verbose_name="card_date", auto_now_add=True)
     kind = models.CharField(max_length=100, null=False, default='nokind')
     # visit_count = models.IntegerField(default=0)
 
 class ItemForm(forms.ModelForm):
     details = forms.CharField(widget=forms.Textarea)
+    item_image1 = forms.CharField(required=False)
+    item_image2 = forms.CharField(required=False)
+    item_image3 = forms.CharField(required=False)
     class Meta:
         model = Item
         fields = ("id", "shop_id", "item_name", "shop_name", "price","details","kind",'item_link',"item_image1", "item_image2", "item_image3")
