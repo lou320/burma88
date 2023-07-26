@@ -59,5 +59,7 @@ class KindOfItem(models.Model):
     ('mushroom', 'Mushroom', [
         'Golden Teacher',
         'Melmac',
+        'Albino Penis Envy',
+        'African Transkei'
     ]),
 ]
