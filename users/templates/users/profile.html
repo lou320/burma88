@@ -47,6 +47,11 @@
                       </div>
                       <br>
                       <div class="form-group">
+                        <input required type="text" name="shop_name" class="form-control" id="exampleFormControlInput1"
+                          placeholder="Shop Name">
+                      </div>
+                      <br>
+                      <div class="form-group">
                         <input required type="number" name="price" class="form-control" id="exampleFormControlInput1"
                           placeholder="Price">
                       </div>
@@ -110,7 +115,6 @@
                         <input name="item_image3" placeholder="Link To Image 1" class="form-control"
                           id="exampleFormControlTextarea1" rows="3">
                       </div>
-                      <input type="hidden" name="shop_name" value="{{ shop_name }}">
                       <input type="hidden" name="shop_id" value="{{id}}">
                       <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancle</button>

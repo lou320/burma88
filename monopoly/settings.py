@@ -105,16 +105,29 @@ TEMPLATES = [
 WSGI_APPLICATION = 'monopoly.wsgi.application'
 
 
-DB_NAME = "db_88burma"
-DB_USER = "db_88burma_user"
-DB_PASSWORD = "tri973z6XOBbqRG2ousJPKWZZKClqkCU"
+# DB_NAME = "db_88burma"
+# DB_USER = "db_88burma_user"
+# DB_PASSWORD = "tri973z6XOBbqRG2ousJPKWZZKClqkCU"
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': DB_NAME,
+#         'USER': DB_USER,
+#         'PASSWORD': DB_PASSWORD,
+#         'HOST': 'dpg-civb8jp5rnuhcns6g97g-a.oregon-postgres.render.com',
+#         'PORT': '5432',
+#     }
+# }
+DB_NAME = "burma88"
+DB_USER = "rose"
+DB_PASSWORD = "tor123Browser"
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': DB_NAME,
         'USER': DB_USER,
         'PASSWORD': DB_PASSWORD,
-        'HOST': 'dpg-civb8jp5rnuhcns6g97g-a.oregon-postgres.render.com',
+        'HOST': 'localhost',
         'PORT': '5432',
     }
 }

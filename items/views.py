@@ -16,10 +16,6 @@ def detail_view(request, item_id):
         'comments': comments,
         'PRODUCT_CHOICES': KindOfItem.PRODUCT_CHOICES,
     }
-    if request.user.is_authenticated:
-        context['order_user'] = request.user.id
-        context['phone1'] = request.user.phone
-
     return render(request, 'details.html', context)
 
 @csrf_exempt
@@ -80,11 +76,11 @@ def post(request):
                 item.id = None
                 item.shop_id = form.cleaned_data['shop_id']
                 item.item_name = form.cleaned_data['item_name']
-                item.shop_name = form.cleaned_data['shop_name']
                 item.price = form.cleaned_data['price']
                 item.details = form.cleaned_data['details']
                 item.kind = form.cleaned_data['kind']
                 item.item_link = form.cleaned_data['item_link']
+                item.shop_name = form.cleaned_data['shop_name']
                 default_image_url = 'https://github.com/lou320/weee_images/blob/main/noimage.jpg?raw=true'
                 if form.cleaned_data['item_image1'] == '':
                     item.item_image1 = default_image_url
