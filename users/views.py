@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from .forms import UsersAuthenticationForm, RegistrationForm, UsersUpdateForm
 from django.contrib.auth import login, authenticate, logout
-from .models import Users, send_verification_email, SocialMedias
+from .models import Users, SocialMedias
 from items.models import Feedback, Item, KindOfItem
 from django.contrib import messages
 from django.core.paginator import Paginator
@@ -22,7 +22,6 @@ def profile_view(request, *args, **kwargs):
     if account:
         context['id'] = account.id
         context['username'] = account.username
-        context['email'] = account.email
         context['profile_image'] = account.profile_image
         context['phone'] = account.phone
         context['user'] = Users.objects.get(id = account.id)
@@ -91,7 +90,6 @@ def update_view(request, *args, **kwargs):
             context['errors'] = form.errors
             form = UsersUpdateForm(initial={
                 "id": account.pk,
-                "email": account.email,
                 "username": account.username,
                 "phone": account.phone,
                 "profile_image": account.profile_image,
@@ -104,7 +102,6 @@ def update_view(request, *args, **kwargs):
         
         form = UsersUpdateForm(request.POST, instance=request.user, initial={
                 "id": account.pk,
-                "email": account.email,
                 "username": account.username,
                 "phone": account.phone,
                 "profile_image": account.profile_image,
@@ -170,11 +167,10 @@ def register_view(request, *args, **kwargs):
         if form.is_valid():
             form.save()
             
-            email = form.cleaned_data.get('email')
+            username = form.cleaned_data.get('username')
             raw_password = form.cleaned_data.get('password1')
             
-            account = authenticate(email =email, password = raw_password)
-            send_verification_email(account)
+            account = authenticate(username =username, password = raw_password)
             login(request, account)
             destination = get_redirect_if_exists(request)
             if destination:
@@ -183,22 +179,6 @@ def register_view(request, *args, **kwargs):
         else:
             context['registration_form'] = form
     return render(request, "users/registration.html", context)
-
-@csrf_exempt
-def verify_email(request, token):
-    try:
-        account = Users.objects.get(verification_token=token)
-    except Users.DoesNotExist:
-        messages.error(request, 'Invalid verification token.')
-        return redirect('home')
-
-    # Mark the account as verified
-    account.is_verified = True
-    account.verification_token = None
-    account.save()
-
-    messages.success(request, 'Email verification successful. You can now log in.')
-    return redirect('/users/login')
 
 @csrf_exempt
 def login_view(request, *args, **kwargs):
@@ -212,9 +192,9 @@ def login_view(request, *args, **kwargs):
     if request.POST:
         form = UsersAuthenticationForm(request.POST)
         if form.is_valid():
-            email = request.POST['email']
+            username = request.POST['username']
             password = request.POST['password']
-            user = authenticate(email=email, password=password)
+            user = authenticate(username=username, password=password)
             if user:
                 login(request,user)
                 destination = get_redirect_if_exists(request)

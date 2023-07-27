@@ -25,33 +25,7 @@ SECRET_KEY = 'django-insecure-s0aj61md&(zcq91+rtu!jf*9khi9l83xvsx$5-)!8x^bn206*u
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-# if DEBUG:
-#     EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' # During development only
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_HOST_USER = 'burma88999@gmail.com'
-EMAIL_HOST_PASSWORD = 'lirxddrjijixhknd'
-EMAIL_USE_TLS = True
-DEFAULT_FROM_EMAIL = 'burma88999@gmail.com'
 
-# EMAIL_BACKEND = 'django_smtp_ssl.SSLEmailBackend'
-# EMAIL_HOST = 'smtp.gmail.com'
-# EMAIL_PORT = 465
-# EMAIL_HOST_USER = 'burmesemarket0@gmail.com'
-# EMAIL_HOST_PASSWORD = 'paul123Theo'
-# EMAIL_USE_SSL = True
-# DEFAULT_FROM_EMAIL = 'burmesemarket0@gmail.com'
-
-
-# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-# EMAIL_HOST = 'your_smtp_host'
-# EMAIL_PORT = your_smtp_port
-# EMAIL_HOST_USER = 'burmesemarket0@gmail.com'
-# EMAIL_HOST_PASSWORD = 'paul123Theo'
-# EMAIL_USE_TLS = True  # Use TLS encryption (optional)
-# EMAIL_USE_SSL = False  # Use SSL encryption (optional)
-# DEFAULT_FROM_EMAIL = 'burmesemarket0@gmail.com'
 ALLOWED_HOSTS = ['*']
 CORS_ALLOWED_ORIGINS = [
     'https://4586-2a09-bac5-4929-18c8-00-278-b0.ngrok-free.app',

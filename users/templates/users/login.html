@@ -39,9 +39,9 @@
                   <p>Please login to your account</p>
                   {% csrf_token %}
                   <div class="form-outline mb-4">
-                    <input type="email" name="email" id="form2Example11" class="form-control"
-                      placeholder="Phone number or email address" />
-                    <label class="form-label" for="form2Example11">Account Email</label>
+                    <input type="text" name="username" id="form2Example11" class="form-control"
+                      placeholder="Username" />
+                    <label class="form-label" for="form2Example11">Account Username</label>
                   </div>
 
                   <div class="form-outline mb-4">
@@ -52,7 +52,6 @@
                   <div class="text-center pt-1 mb-5 pb-1">
                     <button class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" type="submit">Log
                       in</button>
-                    <a class="text-muted" href="{% url 'password_reset' %}">Forgot password?</a>
                   </div>
 
                   <div class="d-flex align-items-center justify-content-center pb-4">

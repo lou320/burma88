@@ -42,7 +42,7 @@
               <div class="cart mt-4 align-items-center"> <a href="{{item.item_link}}"><button class="btn btn-primary text-uppercase"
                 >Buy</button></a> <i
                   class="fa fa-heart text-muted"></i>
-              {%if request.user.is_authenticated and request.user.is_verified%}
+              {%if request.user.is_authenticated%}
                <i class="fa fa-share-alt text-muted"></i> <a
                   href="{% url 'users:save' item.id%}"><button class="btn btn-primary text-uppercase">Save for
                     later</button></a>
@@ -73,7 +73,7 @@
     <div class="col-md-10">
       <div class="justify-content-left">
         <p style="color: red;">{{error}}</p>
-        {%if request.user.is_authenticated  and request.user.is_verified%}
+        {%if request.user.is_authenticated%}
         <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal"
           style="margin: 20px;">Comment</button>
         {% else %}

@@ -9,13 +9,10 @@ from django.utils.html import strip_tags
 
 # Create your models here.
 class MyUsersManager(BaseUserManager):
-	def create_user(self, email, username, password=None):
-		if not email:
-			raise ValueError("user must have an email.")
+	def create_user(self, username, password=None):
 		if not username:
 			raise ValueError("user must have a username.")
 		user = self.model(
-            email=self.normalize_email(email),
             username = username
         )
 		user.set_password(password)
@@ -23,9 +20,8 @@ class MyUsersManager(BaseUserManager):
 		return user
 
 
-	def create_superuser(self, email, username, password):
+	def create_superuser(self,  username, password):
 		user = self.create_user(
-			email=self.normalize_email(email),
 			password=password,
 			username=username,
 		)
@@ -42,21 +38,8 @@ def get_profile_image_filepath(self, filename):
 def get_default_profile_image():
 	return "https://github.com/lou320/weee_images/blob/main/default/default_image.png?raw=true"
 
-def generate_verification_token():
-        return secrets.token_urlsafe(32)
 
-def send_verification_email(users):
-    verification_token = generate_verification_token()
-    users.is_verified = False  # Set initial verification status to False
-    users.verification_token = verification_token
-    users.save()
-    subject = 'Verify your email'
-    html_message = render_to_string('users/verification_email.html', {'users': users})
-    plain_message = strip_tags(html_message)
-    from_email = 'burmesemarket0@gmail.com'  # Update with your email
-    to_email = users.email
-    send_mail(subject, plain_message, from_email, [to_email], html_message=html_message)
-    
+
 # class Feedback(models.Model):
 #     card = models.ForeignKey(Item, on_delete=models.CASCADE)
 #     user = models.ForeignKey(Users, on_delete=models.CASCADE)
@@ -69,7 +52,6 @@ def send_verification_email(users):
 
 
 class Users(AbstractBaseUser):
-	email 					= models.EmailField(verbose_name="email", max_length=60, unique=True)
 	username 				= models.CharField(max_length=30, unique=True)
 	phone					= models.CharField(max_length=20, blank=True)
 	social_media_link		= models.CharField(max_length=255, blank=True)
@@ -81,7 +63,6 @@ class Users(AbstractBaseUser):
 	profile_image			= models.CharField(max_length=500, default=get_default_profile_image)
 	is_shop					= models.BooleanField(default=False)
 	shop_name				= models.CharField(max_length=200, null=True, blank=True)
-	verification_token      = models.CharField(max_length=255, null=True, blank=True)
 	is_verified             = models.BooleanField(default=False)
 	is_admin				= models.BooleanField(default=False)
 	is_active				= models.BooleanField(default=True)
@@ -89,8 +70,8 @@ class Users(AbstractBaseUser):
 	is_superuser			= models.BooleanField(default=False)
 	
 
-	USERNAME_FIELD = 'email'
-	REQUIRED_FIELDS = ['username']
+	USERNAME_FIELD = 'username'
+	# REQUIRED_FIELDS = []
 
 	objects = MyUsersManager()
 	def __str__(self):
