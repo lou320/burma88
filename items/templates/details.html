@@ -33,7 +33,11 @@
                 <p>Kind: {{item.kind}}</p>
                 <div class="price d-flex flex-row align-items-center">
                   
-                  <span style="color: green;" class="act-price">{% if item.price != 0 %}{{item.price}}MMK{% else%}စျေးအပြောင်းအလဲရှိနိုင်{% endif %} </span>
+                  <span style="color: green;" class="act-price">
+                    {% if item.price != 0%} 
+                  {% if item.discount%} <strike> {{item.price}}MMK</strike>
+                  <h3 style="color: green;"><b>{{item.discount}}MMK</b></h3> {% else%} <h3 style="color: green;"><b>{{item.price}}MMK</b></h3>{% endif %}
+                  {% else%}စျေးအပြောင်းအလဲရှိနိုင်{% endif %}</span>
                   
                   
                 </div>

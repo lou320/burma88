@@ -53,7 +53,12 @@
                       <br>
                       <div class="form-group">
                         <input required type="number" name="price" class="form-control" id="exampleFormControlInput1"
-                          placeholder="Price">
+                          placeholder="Original Price">
+                      </div>
+                      <br>
+                      <div class="form-group">
+                        <input type="text" name="discount" class="form-control" id="exampleFormControlInput1"
+                          placeholder="Discount">
                       </div>
                       <br>
                       <div class="form-group">
@@ -346,7 +351,11 @@
                       <h5 class="card-title">Shop: {{item.shop_name}}</h5>
                       <h5 style="display: inline;" class="card-title">Item: {{item.item_name}}</h5>
                       <p>Kind: {{item.kind}}</p>
-                      <p style="color: green;">{% if item.price != 0 %}{{item.price}}MMK{% else%}စျေးအပြောင်းအလဲရှိနိုင်{% endif %}</p>
+                      <p style="color: green;">
+                        {% if item.price != 0 %} 
+                        {% if item.discount%} <strike> {{item.price}}MMK</strike> <br>
+                        <h3 style="color: green;"><b>{{item.discount}}MMK</b></h3> {% else%} <h3 style="color: green;"><b>{{item.discount}}MMK</b></h3>{% endif %}
+                        {% else%}စျေးအပြောင်းအလဲရှိနိုင်{% endif %}</p>
                       <p class="card-text text-truncate">
                         {{item.details}}
                       </p>

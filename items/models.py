@@ -15,6 +15,7 @@ class Item(models.Model):
     item_image3 = models.CharField(max_length=500, default='https://github.com/lou320/weee_images/blob/main/noimage.jpg?raw=true')
     date_posted= models.DateTimeField(verbose_name="card_date", auto_now_add=True)
     kind = models.CharField(max_length=100, null=False, default='nokind')
+    discount = models.CharField(max_length=200, blank=True, null=True)
     # visit_count = models.IntegerField(default=0)
 
 class ItemForm(forms.ModelForm):
@@ -24,7 +25,7 @@ class ItemForm(forms.ModelForm):
     item_image3 = forms.CharField(required=False)
     class Meta:
         model = Item
-        fields = ("id", "shop_id", "item_name", "shop_name", "price","details","kind",'item_link',"item_image1", "item_image2", "item_image3")
+        fields = ("id", "shop_id", "item_name", "shop_name", 'discount',"price","details","kind",'item_link',"item_image1", "item_image2", "item_image3")
 
 class Feedback(models.Model):
     card = models.ForeignKey(Item, on_delete=models.CASCADE)

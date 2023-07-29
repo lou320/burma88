@@ -5,6 +5,7 @@ from django.views.decorators.csrf import csrf_exempt
 from advertisement.models import Advertisement
 from .models import KindOfItem, SearchForm, Item, ItemForm, Feedback
 from users.models import Users
+import math
 
 # Create your views here.
 @csrf_exempt
@@ -80,6 +81,12 @@ def post(request):
                 item.details = form.cleaned_data['details']
                 item.kind = form.cleaned_data['kind']
                 item.item_link = form.cleaned_data['item_link']
+                discount = form.cleaned_data['discount']
+                if discount != None:
+                    if discount[0] == '-':
+                        item.discount = int(item.price) - int(discount[1:])
+                    elif discount[0] == '%':
+                        item.discount = round((int(item.price) - (int(item.price) * (int(discount[1:])/100))))
                 item.shop_name = form.cleaned_data['shop_name']
                 default_image_url = 'https://github.com/lou320/weee_images/blob/main/noimage.jpg?raw=true'
                 if form.cleaned_data['item_image1'] == '':
@@ -94,6 +101,7 @@ def post(request):
                     item.item_image3 = default_image_url
                 else:
                     item.item_image3 = form.cleaned_data['item_image3']
+                
                 item.save()
                 items = Item.objects.filter(shop_id=form.cleaned_data['shop_id'])
                 user = Users.objects.get(id=form.cleaned_data['shop_id'])
