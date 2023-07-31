@@ -62,6 +62,7 @@ class KindOfItem(models.Model):
         'Melmac',
         'Albino Penis Envy',
         'African Transkei',
-        'DK 60'
+        'DK 60',
+        'Z'
     ]),
 ]
