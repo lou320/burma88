@@ -48,7 +48,8 @@ class KindOfItem(models.Model):
         'Kush',
         'Og',
         'Apple Banana',
-        'Wedding Cake'
+        'Wedding Cake',
+        'Northern Light'
         
     ]),
     ('chemical', 'Chemicals', [
