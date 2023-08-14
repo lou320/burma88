@@ -64,6 +64,8 @@ class KindOfItem(models.Model):
         'Albino Penis Envy',
         'African Transkei',
         'DK 60',
-        'Z'
+        'Z',
+        'Nut Cracker',
+        'Malabar'
     ]),
 ]
