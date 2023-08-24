@@ -49,7 +49,10 @@ class KindOfItem(models.Model):
         'Og',
         'Apple Banana',
         'Wedding Cake',
-        'Northern Light'
+        'Northern Light',
+        'Milano Cookie',
+        'Dank Berry',
+        'Wedding Cake'
         
     ]),
     # ('chemical', 'Chemicals', [
@@ -68,4 +71,7 @@ class KindOfItem(models.Model):
         'Nut Cracker',
         'Malabar'
     ]),
+    ('Accessories', 'accessories',[
+        'Mushroom Grower Kit'
+    ])
 ]
