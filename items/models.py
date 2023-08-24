@@ -52,12 +52,12 @@ class KindOfItem(models.Model):
         'Northern Light'
         
     ]),
-    ('chemical', 'Chemicals', [
-        'LSD',
-        'DMDT',
-        'K',
-        'E'
-    ]),
+    # ('chemical', 'Chemicals', [
+    #     'LSD',
+    #     'DMDT',
+    #     'K',
+    #     'E'
+    # ]),
     ('mushroom', 'Mushroom', [
         'Golden Teacher',
         'Melmac',
