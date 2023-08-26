@@ -39,6 +39,7 @@ class SearchForm(forms.Form):
 class KindOfItem(models.Model):
     PRODUCT_CHOICES = [
     ('Weed', 'Weed', [
+        'THC pen',
         'Mango',
         'Purple mango',
         'Og',
@@ -52,7 +53,7 @@ class KindOfItem(models.Model):
         'Northern Light',
         'Milano Cookie',
         'Dank Berry',
-        'Wedding Cake'
+        'Wedding Cake',
         
     ]),
     # ('chemical', 'Chemicals', [
@@ -71,7 +72,7 @@ class KindOfItem(models.Model):
         'Nut Cracker',
         'Malabar'
     ]),
-    ('Accessories', 'accessories',[
+    ('accessories', 'Accessories',[
         'Mushroom Grower Kit'
     ])
 ]
