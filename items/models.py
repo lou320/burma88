@@ -40,28 +40,15 @@ class KindOfItem(models.Model):
     PRODUCT_CHOICES = [
     ('Weed', 'Weed', [
         'THC pen',
-        'Mango',
-        'Purple mango',
-        'Og',
-        'Kyout',
-        'Green Crack',
-        'Lemon Press',
-        'Kush',
-        'Og',
-        'Apple Banana',
-        'Wedding Cake',
-        'Northern Light',
-        'Milano Cookie',
-        'Dank Berry',
-        'Wedding Cake',
-        
+        'Local',
+        'Press',
+        'Mid Grade',
+        'Exotic',
     ]),
-    # ('chemical', 'Chemicals', [
-    #     'LSD',
-    #     'DMDT',
-    #     'K',
-    #     'E'
-    # ]),
+    ('chemical', 'Chemicals', [
+        'LSD',
+        'DMDT',
+    ]),
     ('mushroom', 'Mushroom', [
         'Golden Teacher',
         'Melmac',
