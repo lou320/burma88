@@ -57,10 +57,14 @@
               {% endif %}
               {% if request.user.pk == item.shop_id %}
               <br>
+              
+                <button type="button" class="me-2 btn btn-primary" data-bs-toggle="modal"
+                data-bs-target="#editItemModal">Edit</button>
               <a href="{% url 'items:delete' item.id%}">
               <button type="button" class="btn btn-danger text-uppercase">
                   Delete Post
                 </button></a>
+                
               {% endif %}
             </div>
           </div>
@@ -113,6 +117,110 @@
 
           </div>
 
+        </div>
+      </div>
+
+      <div class="modal" id="editItemModal" tabindex="-1" aria-labelledby="editItemModal" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="editItemModal">Post your item.</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <form method="post" action="{% url 'items:edit' item.id%}" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <div class="form-group">
+                  <input required type="text" name="item_name" value="{{item.item_name}}" class="form-control" id="exampleFormControlInput1"
+                    placeholder="Item Name">
+                </div>
+                <br>
+                <div class="form-group">
+                  <input required type="text" name="shop_name" value="{{item.shop_name}}" class="form-control" id="exampleFormControlInput1"
+                    placeholder="Shop Name">
+                </div>
+                <br>
+                <div class="form-group">
+                  <input required type="number" name="price" value="{{item.price}}" class="form-control" id="exampleFormControlInput1"
+                    placeholder="Original Price">
+                </div>
+                <br>
+                <div class="form-group">
+                  <input type="text" name="discount" class="form-control" id="exampleFormControlInput1"
+                    placeholder="Discount">
+                </div>
+                <br>
+                <div class="form-group">
+                  <input required name="item_link" value="{{item.item_link}}" placeholder="Link To Social Media" class="form-control"
+                    id="exampleFormControlTextarea1" rows="3">
+                </div>
+                <br>
+                <div class="form-group">
+                  <textarea required maxlength="500" name="details" placeholder="Item Detail" class="form-control"
+                    id="exampleFormControlTextarea1" rows="3"></textarea>
+                </div>
+                <br>
+                
+
+                <div class="row">
+                  <div class="col-12">
+                    <label for="exampleFormControlFile1">Please search your product kind.</label>
+                    <input class="form-control me-2" value="{{item.kind}}" id="kindSearchInput" type="search" placeholder="Search"
+                      aria-label="Search">
+                      <select class="form-select" size="3" aria-label="size 3 select example" 
+                      aria-label="size 3 select example" name="kind" id="kindlistContainer">
+                      {% for choice in PRODUCT_CHOICES %}
+                      {% for subcategory in choice.2 %}
+                      <option {% if forloop.first %}selected{% endif %} value="{{ subcategory }}">{{ subcategory }}</option>
+                      {% endfor %}
+                      {% endfor %}
+                      </select>
+                  </div>
+                </div>
+                <script>
+                  document.addEventListener('DOMContentLoaded', function () {
+                    var searchInput = document.getElementById('kindSearchInput');
+                    searchInput.addEventListener('keyup', function () {
+                      var searchText = searchInput.value.toLowerCase();
+                      var listItems = document.querySelectorAll('#kindlistContainer option');
+                      listItems.forEach(function (item) {
+                        var itemText = item.textContent.toLowerCase();
+                        if (itemText.includes(searchText)) {
+                          item.style.display = 'block';
+                        } else {
+                          item.style.display = 'none';
+                        }
+                      });
+                    });
+                  });
+                </script>
+                <br>
+                <div class="form-group">
+                  <input name="item_image1" value="{{item.item_image1}}" placeholder="Link To Image 1" class="form-control"
+                    id="exampleFormControlTextarea1" rows="3">
+                </div>
+                <br>
+                <div class="form-group">
+                  <input name="item_image2" value="{{item.item_image2}}" placeholder="Link To Image 2" class="form-control"
+                    id="exampleFormControlTextarea1" rows="3">
+                </div>
+                <br>
+                <div class="form-group">
+                  <input name="item_image3" value="{{item.item_image3}}" placeholder="Link To Image 3" class="form-control"
+                    id="exampleFormControlTextarea1" rows="3">
+                </div>
+                <div class="modal-footer">
+                  <input type="hidden" name="shop_id" value="{{item.shop_id}}">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancle</button>
+                  <button type="submit" class="btn btn-primary">Post</button>
+                </div>
+
+              </form>
+
+            </div>
+
+          </div>
         </div>
       </div>
     </div>

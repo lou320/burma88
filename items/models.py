@@ -27,6 +27,14 @@ class ItemForm(forms.ModelForm):
         model = Item
         fields = ("id", "shop_id", "item_name", "shop_name", 'discount',"price","details","kind",'item_link',"item_image1", "item_image2", "item_image3")
 
+class ItemEditForm(forms.ModelForm):
+    details = forms.Textarea()
+    item_image1 = forms.CharField(required=False)
+    item_image2 = forms.CharField(required=False)
+    item_image3 = forms.CharField(required=False)
+    class Meta:
+        model = Item
+        fields = ("id", "shop_id", "item_name", "shop_name", 'discount',"price","details","kind",'item_link',"item_image1", "item_image2", "item_image3")
 class Feedback(models.Model):
     card = models.ForeignKey(Item, on_delete=models.CASCADE)
     user = models.ForeignKey(Users, on_delete=models.CASCADE)
