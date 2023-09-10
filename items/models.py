@@ -9,7 +9,7 @@ class Item(models.Model):
     shop_name = models.CharField(max_length=20)
     price = models.IntegerField()
     item_link = models.CharField(max_length=500)
-    details = models.CharField(max_length=500)
+    details = models.TextField()
     item_image1 = models.CharField(max_length=500, default='https://github.com/lou320/weee_images/blob/main/noimage.jpg?raw=true')
     item_image2 = models.CharField(max_length=500, default='https://github.com/lou320/weee_images/blob/main/noimage.jpg?raw=true')
     item_image3 = models.CharField(max_length=500, default='https://github.com/lou320/weee_images/blob/main/noimage.jpg?raw=true')
@@ -19,7 +19,7 @@ class Item(models.Model):
     # visit_count = models.IntegerField(default=0)
 
 class ItemForm(forms.ModelForm):
-    details = forms.CharField(widget=forms.Textarea)
+    details = forms.Textarea()
     item_image1 = forms.CharField(required=False)
     item_image2 = forms.CharField(required=False)
     item_image3 = forms.CharField(required=False)
