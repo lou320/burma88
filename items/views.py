@@ -178,7 +178,7 @@ def edit_item(request, *args, **kwargs):
                     'items': items,
                     'user': user,
                 }
-                return redirect('/users/' + str(request.user.id))  # Redirect to a success page after saving the form
+                return redirect('/items/item/' + str(item_id))  # Redirect to a success page after saving the form
             else:
                 items = Item.objects.order_by('-id')
                 paginator = Paginator(items, 5)
