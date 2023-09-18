@@ -56,6 +56,7 @@ class KindOfItem(models.Model):
     ('chemical', 'Chemicals', [
         'LSD',
         'DMDT',
+        'Lean',
     ]),
     ('mushroom', 'Mushroom', [
         'Golden Teacher',
