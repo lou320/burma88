@@ -68,6 +68,9 @@ class KindOfItem(models.Model):
         'Nut Cracker',
         'Malabar'
     ]),
+    ('blue_lotus', 'Blue Lotus', [
+        'Blue Lotus',
+    ]),
     ('accessories', 'Accessories',[
         'Mushroom Grower Kit'
     ])
