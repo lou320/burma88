@@ -59,6 +59,7 @@ class KindOfItem(models.Model):
         'Lean',
     ]),
     ('mushroom', 'Mushroom', [
+        'Microdose',
         'Golden Teacher',
         'Melmac',
         'Albino Penis Envy',
