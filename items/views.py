@@ -82,6 +82,7 @@ def post(request):
                 item.kind = form.cleaned_data['kind']
                 item.item_link = form.cleaned_data['item_link']
                 discount = form.cleaned_data['discount']
+                item.gram = form.cleaned_data['gram']
                 if discount != None:
                     if discount[0] == '-':
                         item.discount = int(item.price) - int(discount[1:])
@@ -150,6 +151,7 @@ def edit_item(request, *args, **kwargs):
                 item.kind = form.cleaned_data['kind']
                 item.item_link = form.cleaned_data['item_link']
                 discount = form.cleaned_data['discount']
+                item.gram = form.cleaned_data['gram']
                 if discount != None:
                     if discount[0] == '-':
                         item.discount = int(item.price) - int(discount[1:])

@@ -68,8 +68,9 @@
                 alt="No Image" />
               <div class="card-body">
                 
-                <h5 style="display: inline;" class="card-title">Item: {{item.item_name}}</h5>
+                <h5 style="display: inline;" class="card-title">{{item.item_name}}</h5>
                 <p style="color: green;">
+                  <h5 style="color: black;">{{item.gram}} Gram</h5>
                   {% if item.price != 0%} 
                   {% if item.discount%} <strike> {{item.price}}MMK</strike>
                   <h3 style="color: green;"><b>{{item.discount}}MMK</b></h3> {% else%} <h3 style="color: green;"><b>{{item.price}}MMK</b></h3>{% endif %}

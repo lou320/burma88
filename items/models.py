@@ -10,6 +10,7 @@ class Item(models.Model):
     price = models.IntegerField()
     item_link = models.CharField(max_length=500)
     details = models.TextField()
+    gram = models.IntegerField()
     item_image1 = models.CharField(max_length=500, default='https://github.com/lou320/weee_images/blob/main/noimage.jpg?raw=true')
     item_image2 = models.CharField(max_length=500, default='https://github.com/lou320/weee_images/blob/main/noimage.jpg?raw=true')
     item_image3 = models.CharField(max_length=500, default='https://github.com/lou320/weee_images/blob/main/noimage.jpg?raw=true')
@@ -25,7 +26,7 @@ class ItemForm(forms.ModelForm):
     item_image3 = forms.CharField(required=False)
     class Meta:
         model = Item
-        fields = ("id", "shop_id", "item_name", "shop_name", 'discount',"price","details","kind",'item_link',"item_image1", "item_image2", "item_image3")
+        fields = ("id", "shop_id", "item_name", "shop_name", 'discount',"price","details","gram","kind",'item_link',"item_image1", "item_image2", "item_image3")
 
 class ItemEditForm(forms.ModelForm):
     details = forms.Textarea()
@@ -34,7 +35,7 @@ class ItemEditForm(forms.ModelForm):
     item_image3 = forms.CharField(required=False)
     class Meta:
         model = Item
-        fields = ("id", "shop_id", "item_name", "shop_name", 'discount',"price","details","kind",'item_link',"item_image1", "item_image2", "item_image3")
+        fields = ("id", "shop_id", "item_name", "shop_name", 'discount',"price","details","gram","kind",'item_link',"item_image1", "item_image2", "item_image3")
 class Feedback(models.Model):
     card = models.ForeignKey(Item, on_delete=models.CASCADE)
     user = models.ForeignKey(Users, on_delete=models.CASCADE)

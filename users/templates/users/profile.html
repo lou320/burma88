@@ -57,6 +57,11 @@
                       </div>
                       <br>
                       <div class="form-group">
+                        <input required type="number" name="gram" class="form-control" id="exampleFormControlInput1"
+                          placeholder="Gram">
+                      </div>
+                      <br>
+                      <div class="form-group">
                         <input type="text" name="discount" class="form-control" id="exampleFormControlInput1"
                           placeholder="Discount">
                       </div>
@@ -348,13 +353,14 @@
                     <img src="{{item.item_image1}}" style="height: 300px; object-fit: scale-down;"
                       class="card-img-top rounded-top img-fluid" alt="No Image" />
                     <div class="card-body">
-                      <h5 style="display: inline;" class="card-title">Item: {{item.item_name}}</h5>
+                      <h5 style="display: inline;" class="card-title">{{item.item_name}}</h5>
                       <p>Kind: {{item.kind}}</p>
                       <p style="color: green;">
+                        <h5 style="color: black;">{{item.gram}} Gram</h5>
                         {% if item.price != 0%} 
                         {% if item.discount%} <strike> {{item.price}}MMK</strike>
                         <h3 style="color: green;"><b>{{item.discount}}MMK</b></h3> {% else%} <h3 style="color: green;"><b>{{item.price}}MMK</b></h3>{% endif %}
-                        {% else%}စျေးအပြောင်းအလဲရှိနိုင်{% endif %}</p>
+                        {% else%}<h4 style="color: green;"><b>စျေးအပြောင်းအလဲရှိနိုင်</b></h4>{% endif %}</p>
                         
                       <p class="card-text text-truncate">
                         {{item.details}}
