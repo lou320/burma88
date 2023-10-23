@@ -12,7 +12,6 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 import os
 from pathlib import Path
-import dj_database_url
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -79,16 +78,16 @@ TEMPLATES = [
 WSGI_APPLICATION = 'monopoly.wsgi.application'
 
 
-DB_NAME = "db_88burma"
-DB_USER = "db_88burma_user"
-DB_PASSWORD = "tri973z6XOBbqRG2ousJPKWZZKClqkCU"
+DB_NAME = "monopoly_sdqh"
+DB_USER = "monopoly_sdqh_user"
+DB_PASSWORD = "YIfb5juXl3vJl6N4pHDeh7OQWTMUR7p1"
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': DB_NAME,
         'USER': DB_USER,
         'PASSWORD': DB_PASSWORD,
-        'HOST': 'dpg-civb8jp5rnuhcns6g97g-a.oregon-postgres.render.com',
+        'HOST': 'dpg-ckr3b5o5vl2c73ag6dtg-a.oregon-postgres.render.com',
         'PORT': '5432',
     }
 }
