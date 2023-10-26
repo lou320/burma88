@@ -18,8 +18,8 @@
         <div class="row ">
           <div class="col-md-6">
             <div class="images p-3">
-              <div class="text-center p-4"> {% if item.item_image1 %}<img id="main-image" src="{{item.item_image1}}" width="100%" /> {% elif item.item_image2 %} <img id="main-image" src="{{item.item_image2}}" width="250" /> {% elif item.item_image3 %} <img id="main-image" src="{{item.item_image3}}" width="250"/> {% endif %} </div>
-              <div class="thumbnail text-center"> {% if item.item_image2 %} <img onclick="change_image(this)" src="{{item.item_image2}}" width="70"> {% endif %} {% if item.item_image3 %} <img onclick="change_image(this)" src="{{item.item_image3}}" width="70"> {% endif %} {% if item.item_image1 %} <img onclick="change_image(this)" src="{{item.item_image1}}" width="70"> {% endif %}
+              <div class="text-center p-4"> {% if item.item_image1 %}<img id="main-image" src="{{item.item_image1.url}}" width="100%" /> {% elif item.item_image2 %} <img id="main-image" src="{{item.item_image2.url}}" width="250" /> {% elif item.item_image3 %} <img id="main-image" src="{{item.item_image3.url}}" width="250"/> {% endif %} </div>
+              <div class="thumbnail text-center"> {% if item.item_image2 %} <img onclick="change_image(this)" src="{{item.item_image2.url}}" width="70"> {% endif %} {% if item.item_image3 %} <img onclick="change_image(this)" src="{{item.item_image3.url}}" width="70"> {% endif %} {% if item.item_image1 %} <img onclick="change_image(this)" src="{{item.item_image1.url}}" width="70"> {% endif %}
               </div>
             </div>
           </div>
@@ -202,17 +202,17 @@
                 </script>
                 <br>
                 <div class="form-group">
-                  <input name="item_image1" value="{{item.item_image1}}" placeholder="Link To Image 1" class="form-control"
+                  <input name="item_image1" value="{{item.item_image1}}" type="file" class="form-control"
                     id="exampleFormControlTextarea1" rows="3">
                 </div>
                 <br>
                 <div class="form-group">
-                  <input name="item_image2" value="{{item.item_image2}}" placeholder="Link To Image 2" class="form-control"
+                  <input name="item_image2" value="{{item.item_image2}}" type="file" class="form-control"
                     id="exampleFormControlTextarea1" rows="3">
                 </div>
                 <br>
                 <div class="form-group">
-                  <input name="item_image3" value="{{item.item_image3}}" placeholder="Link To Image 3" class="form-control"
+                  <input name="item_image3" value="{{item.item_image3}}" type="file" class="form-control"
                     id="exampleFormControlTextarea1" rows="3">
                 </div>
                 <div class="modal-footer">

@@ -112,17 +112,17 @@
                       </script>
                       <br>
                       <div class="form-group">
-                        <input name="item_image1" placeholder="Link To Image 1" class="form-control"
+                          <input name="item_image1" type="file" class="form-control"
                           id="exampleFormControlTextarea1" rows="3">
                       </div>
                       <br>
                       <div class="form-group">
-                        <input name="item_image2" placeholder="Link To Image 2" class="form-control"
+                        <input name="item_image2" type="file" class="form-control"
                           id="exampleFormControlTextarea1" rows="3">
                       </div>
                       <br>
                       <div class="form-group">
-                        <input name="item_image3" placeholder="Link To Image 3" class="form-control"
+                        <input name="item_image3" type="file" class="form-control"
                           id="exampleFormControlTextarea1" rows="3">
                       </div>
                       <input type="hidden" name="shop_id" value="{{id}}">
@@ -350,7 +350,7 @@
               <a href="{% url 'items:detail' item.id%}">
                 <div class="col">
                   <div class="card">
-                    <img src="{{item.item_image1}}" style="height: 300px; object-fit: scale-down;"
+                    <img src="{{item.item_image1.url}}" style="height: 300px; object-fit: scale-down;"
                       class="card-img-top rounded-top img-fluid" alt="No Image" />
                     <div class="card-body">
                       <h5 style="display: inline;" class="card-title">{{item.item_name}}</h5>

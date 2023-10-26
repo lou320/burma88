@@ -70,7 +70,7 @@ def search_view(request):
 def post(request):
     context = {}
     if request.method == 'POST':
-        form = ItemForm(request.POST)
+        form = ItemForm(request.POST, request.FILES)
         if form.is_valid():
             if request.user.is_verified:
                 item = form.save(commit=False)
@@ -89,20 +89,19 @@ def post(request):
                     elif discount[0] == '%':
                         item.discount = round((int(item.price) - (int(item.price) * (int(discount[1:])/100))))
                 item.shop_name = form.cleaned_data['shop_name']
-                default_image_url = 'https://github.com/lou320/weee_images/blob/main/noimage.jpg?raw=true'
-                if form.cleaned_data['item_image1'] == '':
-                    item.item_image1 = default_image_url
-                else:
+                if form.cleaned_data['item_image1']:
                     item.item_image1 = form.cleaned_data['item_image1']
-                if form.cleaned_data['item_image2'] == '':
-                    item.item_image2 = default_image_url
                 else:
+                    item.item_image1 = None
+                if form.cleaned_data['item_image2'] != None:
                     item.item_image2 = form.cleaned_data['item_image2']
-                if form.cleaned_data['item_image3'] == '':
-                    item.item_image3 = default_image_url
                 else:
+                    item.item_image2 = None
+                if form.cleaned_data['item_image3'] != None:
                     item.item_image3 = form.cleaned_data['item_image3']
-                
+                else:
+                    item.item_image3 = None
+
                 item.save()
                 items = Item.objects.filter(shop_id=form.cleaned_data['shop_id'])
                 user = Users.objects.get(id=form.cleaned_data['shop_id'])
@@ -140,7 +139,7 @@ def post(request):
 
 def edit_item(request, *args, **kwargs):
     if request.method == 'POST':
-        form = ItemEditForm(request.POST)
+        form = ItemEditForm(request.POST, request.FILES)
         if form.is_valid():
             if request.user.is_verified:
                 item_id = kwargs.get('item_id')
@@ -159,17 +158,11 @@ def edit_item(request, *args, **kwargs):
                         item.discount = round((int(item.price) - (int(item.price) * (int(discount[1:])/100))))
                 item.shop_name = form.cleaned_data['shop_name']
                 default_image_url = 'https://github.com/lou320/weee_images/blob/main/noimage.jpg?raw=true'
-                if form.cleaned_data['item_image1'] == '':
-                    item.item_image1 = default_image_url
-                else:
+                if form.cleaned_data['item_image1']!= None:
                     item.item_image1 = form.cleaned_data['item_image1']
-                if form.cleaned_data['item_image2'] == '':
-                    item.item_image2 = default_image_url
-                else:
+                if form.cleaned_data['item_image2'] != None:
                     item.item_image2 = form.cleaned_data['item_image2']
-                if form.cleaned_data['item_image3'] == '':
-                    item.item_image3 = default_image_url
-                else:
+                if form.cleaned_data['item_image3'] != None:
                     item.item_image3 = form.cleaned_data['item_image3']
                 
                 item.save()

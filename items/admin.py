@@ -8,6 +8,7 @@ class ItemAdmin(admin.ModelAdmin):
 	filter_horizontal = ()
 	list_filter = ()
 	fieldsets = ()
+
 admin.site.register(Item, ItemAdmin)
 class FeedbackAdmin(admin.ModelAdmin):
 	list_display = ("user",'comment')
@@ -17,3 +18,5 @@ class FeedbackAdmin(admin.ModelAdmin):
 	list_filter = ()
 	fieldsets = ()
 admin.site.register(Feedback, FeedbackAdmin)
+
+# admin.site.register(ImageStore)
