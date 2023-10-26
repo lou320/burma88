@@ -84,16 +84,16 @@ TEMPLATES = [
 WSGI_APPLICATION = 'monopoly.wsgi.application'
 
 
-DB_NAME = "monopoly_sdqh"
-DB_USER = "monopoly_sdqh_user"
-DB_PASSWORD = "YIfb5juXl3vJl6N4pHDeh7OQWTMUR7p1"
+DB_NAME = "burma88"
+DB_USER = "burma88_user"
+DB_PASSWORD = "ZKS71AfsLVKDMQl4wUTdcbsHllsUlML6"
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': DB_NAME,
         'USER': DB_USER,
         'PASSWORD': DB_PASSWORD,
-        'HOST': 'dpg-ckr3b5o5vl2c73ag6dtg-a.oregon-postgres.render.com',
+        'HOST': 'dpg-cksvtbg168ec73f3j51g-a.oregon-postgres.render.com',
         'PORT': '5432',
     }
 }
