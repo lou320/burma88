@@ -31,11 +31,6 @@ SECRET_KEY = 'django-insecure-s0aj61md&(zcq91+rtu!jf*9khi9l83xvsx$5-)!8x^bn206*u
 DEBUG = True
 
 ALLOWED_HOSTS = ['*']
-CORS_ALLOWED_ORIGINS = [
-    'https://4586-2a09-bac5-4929-18c8-00-278-b0.ngrok-free.app',
-    # Add other origins if needed
-]
-
 
 # Application definition
 
@@ -51,9 +46,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'debug_toolbar',
 ]
 
 MIDDLEWARE = [
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -129,6 +126,17 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": "redis://red-cl16ciis1bgc73f8t150:6379",
+        "OPTONS":{
+            "CLIENT_CLASS": "django_redis.client.DefaultClient"
+        }
+    }
+}
+
 
 AUTH_USER_MODEL = 'users.Users' 
 AUTHENTICATION_BACKENDS = ( 

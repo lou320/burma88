@@ -79,8 +79,3 @@ class KindOfItem(models.Model):
         'Mushroom Grower Kit'
     ])
 ]
-
-# class ImageStore(models.Model):
-#     title = models.CharField(max_length=100)
-#     description = models.CharField(max_length=255)
-#     image = CloudinaryField('image')

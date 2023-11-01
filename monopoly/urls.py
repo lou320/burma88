@@ -15,7 +15,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from main.views import (home_screen_view)
+from main.views import home_screen_view, cached, cacheless
 from django.conf import settings
 from django.conf.urls.static import static
 from django.urls import include, path
@@ -26,6 +26,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('items/', include('items.urls')),
     path('users/', include('users.urls')),
+    path('cached', cached, name='cached'),
+    path('cacheless', cacheless, name='cacheless'),
     path('password_change/done/', auth_views.PasswordChangeDoneView.as_view(template_name='password/password_change_done.html'), 
         name='password_change_done'),
 

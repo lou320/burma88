@@ -2,9 +2,24 @@ from django.shortcuts import render
 from items.models import Item, KindOfItem
 from django.core.paginator import Paginator
 from advertisement.models import Advertisement
+from django.contrib.auth import get_user_model
+from django.http import HttpResponse
 # Create your views here.
 from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.cache import cache_page
 
+
+@cache_page(60*15)
+def cached(request):
+    user_model = get_user_model()
+    all_users = user_model.objects.all()
+    return HttpResponse('<html><body><h1>{0} users.. cached</h1></body></html>'.format(len(all_users)))
+
+
+def cacheless(request):
+    user_model = get_user_model()
+    all_users = user_model.objects.all()
+    return HttpResponse('<html><body><h1>{0} users.. cacheless</h1></body></html>'.format(len(all_users)))
 
 @csrf_exempt
 def home_screen_view(request, *args, **kwargs):
