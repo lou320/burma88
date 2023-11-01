@@ -131,11 +131,12 @@ CACHES = {
     "default": {
         "BACKEND": "django_redis.cache.RedisCache",
         "LOCATION": "redis://red-cl16ciis1bgc73f8t150:6379",
-        "OPTONS":{
+        "OPTIONS": {
             "CLIENT_CLASS": "django_redis.client.DefaultClient"
-        }
+        },
     }
 }
+
 
 
 AUTH_USER_MODEL = 'users.Users' 
