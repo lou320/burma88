@@ -9,6 +9,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.cache import cache_page
 
 
+@cache_page(60*3)
 def cached(request):
     user_model = get_user_model()
     all_users = user_model.objects.all()
@@ -21,7 +22,7 @@ def cacheless(request):
     return HttpResponse('<html><body><h1>{0} users.. cacheless</h1></body></html>'.format(len(all_users)))
 
 @csrf_exempt
-@cache_page
+@cache_page()
 def home_screen_view(request, *args, **kwargs):
     context = {}
     cards = Item.objects.order_by('-id')
