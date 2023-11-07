@@ -5,10 +5,11 @@ from django.views.decorators.csrf import csrf_exempt
 from advertisement.models import Advertisement
 from .models import KindOfItem, SearchForm, Item, ItemForm, Feedback, ItemEditForm
 from users.models import Users
-import math
+from django.views.decorators.cache import cache_page
 
 # Create your views here.
 @csrf_exempt
+@cache_page((60*5))
 def detail_view(request, item_id):
     item = Item.objects.get(id=item_id)
     comments = Feedback.objects.filter(card_id=item_id).order_by('-id')
