@@ -8,7 +8,7 @@ from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.cache import cache_page
 
-
+@cache_page(60)
 def cached(request):
     user_model = get_user_model()
     all_users = user_model.objects.all()

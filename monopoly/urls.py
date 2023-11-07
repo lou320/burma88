@@ -20,12 +20,14 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.urls import include, path
 from django.contrib.auth import views as auth_views
+import debug_toolbar
 
 urlpatterns = [
     path('', home_screen_view, name="home"),
     path('admin/', admin.site.urls),
     path('items/', include('items.urls')),
     path('users/', include('users.urls')),
+    path('__debug__/', include(debug_toolbar.urls)),
     path('cached', cached, name='cached'),
     path('cacheless', cacheless, name='cacheless'),
     path('password_change/done/', auth_views.PasswordChangeDoneView.as_view(template_name='password/password_change_done.html'), 
