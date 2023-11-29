@@ -6,6 +6,7 @@ from advertisement.models import Advertisement
 from .models import KindOfItem, SearchForm, Item, ItemForm, Feedback, ItemEditForm
 from users.models import Users
 from django.views.decorators.cache import cache_page
+from django.core.cache import cache
 
 # Create your views here.
 @csrf_exempt
@@ -225,4 +226,5 @@ def delete_item(requeset, *args, **kwargs):
     item_id = kwargs.get('item_id')
     item = Item.objects.get(id = item_id)
     item.delete()
+    cache.clear()
     return redirect('home')
