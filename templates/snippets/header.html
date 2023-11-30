@@ -39,15 +39,15 @@
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" data-bs-target="#dropdownMenu" aria-expanded="false">
               Account
             </a>
-            <ul class="dropdown-menu" id="dropdownMenu">{%if request.user.is_authenticated%}
-              <li><a class="dropdown-item" href="{% url 'users:profile' request.user.id%}">Profile</a></li>
-              <li><a class="dropdown-item" href="{% url 'users:saved'%}">Saved Items</a></li>
-              <li><a class="dropdown-item" href="{% url 'users:logout'%}">Logout</a></li>
-              {% else %}
-              <li><a class="dropdown-item" href="{% url 'users:login'%}">Login</a></li>
-              <li><a class="dropdown-item" href="{% url 'users:registration'%}">Register</a></li>
-              {% endif %}
-            </ul>
+<!--            <ul class="dropdown-menu" id="dropdownMenu">{%if request.user.is_authenticated%}-->
+<!--              <li><a class="dropdown-item" href="{% url 'users:profile' request.user.id%}">Profile</a></li>-->
+<!--              <li><a class="dropdown-item" href="{% url 'users:saved'%}">Saved Items</a></li>-->
+<!--              <li><a class="dropdown-item" href="{% url 'users:logout'%}">Logout</a></li>-->
+<!--              {% else %}-->
+<!--              <li><a class="dropdown-item" href="{% url 'users:login'%}">Login</a></li>-->
+<!--              <li><a class="dropdown-item" href="{% url 'users:registration'%}">Register</a></li>-->
+<!--              {% endif %}-->
+<!--            </ul>-->
           </li>
           
           {% for choice in PRODUCT_CHOICES %}
