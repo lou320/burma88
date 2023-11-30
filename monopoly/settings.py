@@ -94,9 +94,11 @@ DATABASES = {
         'PORT': '5432',
     }
 }
-# DB_NAME = "burma88"
-# DB_USER = "rose"
-# DB_PASSWORD = "tor123Browser"
+
+
+# DB_NAME = "eightburma"
+# DB_USER = "eightburma"
+# DB_PASSWORD = "rose"
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -107,7 +109,7 @@ DATABASES = {
 #         'PORT': '5432',
 #     }
 # }
-
+#
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
@@ -127,16 +129,25 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-CACHES = {
-    "default": {
-        "BACKEND": "django_redis.cache.RedisCache",
-        "LOCATION": "rediss://red-cl174qqs1bgc73fg64m0:Uh6RzXGraP3WEibeqkcr85TZ9DRB19Am@singapore-redis.render.com:6379",
-        "OPTIONS": {
-            "CLIENT_CLASS": "django_redis.client.DefaultClient"
-        },
-    }
-}
+# CACHES = {
+#     "default": {
+#         "BACKEND": "django_redis.cache.RedisCache",
+#         "LOCATION": "rediss://red-cl174qqs1bgc73fg64m0:Uh6RzXGraP3WEibeqkcr85TZ9DRB19Am@singapore-redis.render.com:6379",
+#         "OPTIONS": {
+#             "CLIENT_CLASS": "django_redis.client.DefaultClient"
+#         },
+#     }
+# }
 
+# CACHES = {
+#     "default": {
+#         "BACKEND": "django_redis.cache.RedisCache",
+#         "LOCATION": "redis://127.0.0.1:6379",
+#         "OPTIONS": {
+#             "CLIENT_CLASS": "django_redis.client.DefaultClient"
+#         },
+#     }
+# }
 
 
 AUTH_USER_MODEL = 'users.Users' 

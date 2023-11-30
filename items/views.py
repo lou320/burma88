@@ -225,5 +225,5 @@ def delete_item(requeset, *args, **kwargs):
     item_id = kwargs.get('item_id')
     item = Item.objects.get(id = item_id)
     item.delete()
-    cache.clear()
+    cache.delete('cache_page:1:views.decorators.cache.cache_header..home_screen_view.{home}')
     return redirect('home')

@@ -20,7 +20,7 @@ def cacheless(request):
     return HttpResponse('<html><body><h1>{0} users.. cacheless</h1></body></html>'.format(len(all_users)))
 
 
-@cache_page(60*15)
+@csrf_exempt
 def home_screen_view(request, *args, **kwargs):
     context = {}
     cards = Item.objects.order_by('-id')
