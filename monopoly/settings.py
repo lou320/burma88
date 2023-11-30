@@ -109,7 +109,7 @@ DATABASES = {
 #         'PORT': '5432',
 #     }
 # }
-#
+
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
@@ -129,15 +129,15 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-# CACHES = {
-#     "default": {
-#         "BACKEND": "django_redis.cache.RedisCache",
-#         "LOCATION": "rediss://red-cl174qqs1bgc73fg64m0:Uh6RzXGraP3WEibeqkcr85TZ9DRB19Am@singapore-redis.render.com:6379",
-#         "OPTIONS": {
-#             "CLIENT_CLASS": "django_redis.client.DefaultClient"
-#         },
-#     }
-# }
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": "rediss://red-cl174qqs1bgc73fg64m0:Uh6RzXGraP3WEibeqkcr85TZ9DRB19Am@singapore-redis.render.com:6379",
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient"
+        },
+    }
+}
 
 # CACHES = {
 #     "default": {

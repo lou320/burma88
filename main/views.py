@@ -21,6 +21,7 @@ def cacheless(request):
 
 
 @csrf_exempt
+@cache_page(60*5)
 def home_screen_view(request, *args, **kwargs):
     context = {}
     cards = Item.objects.order_by('-id')

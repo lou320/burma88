@@ -111,6 +111,7 @@ def post(request):
                     'items': items,
                     'user': user,
                 }
+                cache.clear()
                 return redirect('/users/' + str(request.user.id))  # Redirect to a success page after saving the form
             else:
                 items = Item.objects.order_by('-id')
@@ -174,6 +175,7 @@ def edit_item(request, *args, **kwargs):
                     'items': items,
                     'user': user,
                 }
+                cache.clear()
                 return redirect('/items/item/' + str(item_id))  # Redirect to a success page after saving the form
             else:
                 items = Item.objects.order_by('-id')
@@ -225,5 +227,5 @@ def delete_item(requeset, *args, **kwargs):
     item_id = kwargs.get('item_id')
     item = Item.objects.get(id = item_id)
     item.delete()
-    cache.delete('cache_page:1:views.decorators.cache.cache_header..home_screen_view.{home}')
+    cache.clear()
     return redirect('home')
