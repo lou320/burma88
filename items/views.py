@@ -10,7 +10,6 @@ from django.core.cache import cache
 
 # Create your views here.
 @csrf_exempt
-@cache_page((60*5))
 def detail_view(request, item_id):
     item = Item.objects.get(id=item_id)
     comments = Feedback.objects.filter(card_id=item_id).order_by('-id')
